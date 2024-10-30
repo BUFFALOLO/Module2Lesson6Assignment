@@ -30,7 +30,7 @@ reviews = [
      ]
 
 def capitalize_words(reviews):
-    keywords = ["good", "excellent", "bad", "poor", "average"]
+    keywords = ["good", "excellent", "bad", "Poor", "average"]
     for review in reviews:
         for keyword in keywords:
             review = review.replace(keyword, keyword.upper())
@@ -38,8 +38,9 @@ def capitalize_words(reviews):
 
 capitalize_words(reviews)
 
-split_reviews = [review.split(',') for review in reviews]
-print(split_reviews)
+print("\n")
+
+split_reviews = [review.split() for review in reviews]
 
 def word_counter(split_reviews):
     positive_words = ["good", "excellent", "great", "awesome", "fantastic", "superb", "amazing"]
@@ -48,16 +49,19 @@ def word_counter(split_reviews):
     negative_count = 0
 
     for words in split_reviews:
-        if words in positive_words:
-            positive_count[words] += 1
-        elif words in negative_words:
-            negative_count[words] += 1
+        for word in words:
+            word_lower = word.lower().strip(".,!?")
+            if word_lower in positive_words:
+                positive_count += 1
+            elif word_lower in negative_words:
+                negative_count += 1
 
     return positive_count, negative_count
 
 postive_count, negative_count = word_counter(split_reviews)
+
 print(f" There are {postive_count} postive words.")
-print(f" There are {negative_count} postive words.")
+print(f" There are {negative_count} negative words.")
 
 """
 2. User Input Data Processor
